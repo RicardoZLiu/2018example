@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="刘政，网络，前端，技术，博客">
+    <meta name="description" content="刘政的个人网站，记录生活中的点点滴滴，分享学习心得，感悟生活">
+    <title>给我留言</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/guestbook.css">
+</head>
+<body>
+<!--header start-->
+<header id="header">
+    <!--top start-->
+    <div class="top">
+        <div class="top-inner layout">
+            <div class="logo">
+                <a href="/">冰菓</a>
+            </div>
+            <!--main-nav start-->
+            <div class="main-nav">
+                <ul class="nav-inner">
+                    <li>
+                        <a onclick="window.location.href='../index.html'">首页<span>HOME</span></a>
+                    </li>
+                    <li>
+                        <a href="#">生活笔记<span>STORY</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='story/essay.html'">个人随笔</a></li>
+                            <li><a onclick="window.location.href='story/diary.html'">个人日记</a></li>
+                            <li><a onclick="window.location.href='story/exhibition.html'">个人展示</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">学习之路<span>STUDY</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='study/hcnote.html'">HTML&CSS</a></li>
+                            <li><a onclick="window.location.href='study/JSnote.html'">JS&JQ</a></li>
+                            <li><a onclick="window.location.href='study/hfctnote.html'">HTML5&CSS3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a onclick="window.location.href='aboutUs.html'">关于自己<span>ABOUT US</span></a>
+                    </li>
+                    <li>
+                        <a onclick="window.location.href='guest.html'">给我留言<span>GUESTBOOK</span></a>
+                    </li>
+                    <li>
+                        <a href="#">特效案例<span>EXAMPLE</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='example/game.html'">游戏</a></li>
+                            <li><a onclick="window.location.href='example/love.html'">表白</a></li>
+                            <li><a onclick="window.location.href='example/other.html'">其他</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="sub_nav"></div>
+            </div>
+            <!--main-nav end-->
+            <div class="top-right">
+                <!--登录-->
+                <div class="user" id="loginUser">
+                    <div class="icon-user"></div>
+                    <a href="#">登录</a>
+                </div>
+                <!--注册-->
+                <div class="login">
+                    <div class="icon-login"></div>
+                    <a href="#">注册</a>
+                </div>
+                <form>
+                    <div class="login-mask" id="loginMask">
+                        <div class="loginbox" id="loginBox">
+                            <div class="login-title"><h2>用户登录</h2></div>
+                                <ul class="login-body">
+                                    <li>
+                                        <input type="text" placeholder="登录账号" autofocus>
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="登录密码">
+                                    </li>
+                                    <li>
+                                        <input type = "text" placeholder="请输入验证码" id = "lginput" value="" onBlur="lgvalidate()" />  
+                                        <input type = "button" id="lgcode" onclick="lgcreateCode()"/> 
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="登录" class="blue">
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="注册" class="blue regester">
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="管理员登录" class="blue">
+                                    </li>
+                                </ul>
+                        </div>
+                         <div class="loginbox" id="regesterBox">
+                            <div class="login-title"><h2>用户注册</h2></div>
+                                <ul class="login-body">
+                                    <li>
+                                        <input type="text" placeholder="登录账号" autofocus>
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="登录密码">
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="再输入一次密码">
+                                    </li>
+                                    <li>
+                                        <input type="email" placeholder="请输入邮箱">
+                                    </li>                                    
+                                    <li>
+                                        <input type = "text" placeholder="请输入验证码" id = "yzinput" value="" onBlur="yzvalidate()"/>  
+                                        <input type = "button" id="yzcode" onclick="yzcreateCode()"/> 
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="注册完成" class="blue">
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </form>
+                <!--搜索框-->
+                <div class="search">
+                    <input type="text" class="search"  placeholder="Search..." autofocus value="">
+                    <div class="icon-search"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--top end-->
+    <!--换肤开始-->
+    <div class="banner clearfix" id="banner">
+        <img src="../images/bodyBg/bodyBg1.jpg" alt="派大星"/>
+        <img src="../images/bodyBg/bodyBg2.jpg" alt="I am OK！"/>
+        <img src="../images/bodyBg/bodyBg3.jpg" alt="小熊"/>
+        <img src="../images/bodyBg/bodyBg4.jpg" alt="方块"/>
+        <img src="../images/bodyBg/bodyBg5.jpg" alt="厕所"/>
+    </div>
+    <!--换肤结束-->
+</header>
+<!--header end-->
+
+<!--content start-->
+<div class="content clearfix">
+    <div class="content-inner layout" >
+        <h1>您所在的位置是：<a onclick="window.location.href='../../index.html'">首页</a> &gt; <a href="#">给我留言</a></h1>
+        <div class="person-content">
+            <div id="qq">
+                <p>有什么事想告诉我?</p>
+                <div class="message" contentEditable='true'></div>
+
+                <div class="But">
+                    <img src="../images/guest/bba_thumb.gif" class='bq'/>
+                    <span class='submit'>留言</span>
+                    <!--face begin-->
+                    <div class="face">
+                        <ul>
+                            <li><img src="../images/guest/zz2_thumb.gif" title="[织]" ></li>
+                            <li><img src="../images/guest/horse2_thumb.gif" title="神马]"></li>
+                            <li><img src="../images/guest/fuyun_thumb.gif" title="[浮云]"></li>
+                            <li><img src="../images/guest/geili_thumb.gif" title="[给力]"></li>
+                            <li><img src="../images/guest/wg_thumb.gif" title="[围观]"></li>
+                            <li><img src="../images/guest/vw_thumb.gif" title="[威武]"></li>
+                            <li><img src="../images/guest/panda_thumb.gif" title="[熊猫]"></li>
+                            <li><img src="../images/guest/rabbit_thumb.gif" title="兔子]"></li>
+                            <li><img src="../images/guest/otm_thumb.gif" title="[奥特曼]"></li>
+                            <li><img src="../images/guest/j_thumb.gif" title="[囧]"></li>
+                            <li><img src="../images/guest/hufen_thumb.gif" title="[互粉]"></li>
+                            <li><img src="../images/guest/liwu_thumb.gif" title="[礼物]"></li>
+                            <li><img src="../images/guest/smilea_thumb.gif" title="呵呵]"></li>
+                            <li><img src="../images/guest/tootha_thumb.gif" title="嘻嘻]"></li>
+                            <li><img src="../images/guest/laugh.gif" title="[哈哈]"></li>
+                            <li><img src="../images/guest/tza_thumb.gif" title="[可爱]"></li>
+                            <li><img src="../images/guest/kl_thumb.gif" title="[可怜]"></li>
+                            <li><img src="../images/guest/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+                            <li><img src="../images/guest/cj_thumb.gif" title="[吃惊]"></li>
+                            <li><img src="../images/guest/shamea_thumb.gif" title="[害羞]"></li>
+                            <li><img src="../images/guest/zy_thumb.gif" title="[挤眼]"></li>
+                            <li><img src="../images/guest/bz_thumb.gif" title="[闭嘴]"></li>
+                            <li><img src="../images/guest/bs2_thumb.gif" title="[鄙视]"></li>
+                            <li><img src="../images/guest/lovea_thumb.gif" title="[爱你]"></li>
+                            <li><img src="../images/guest/sada_thumb.gif" title="[泪]"></li>
+                            <li><img src="../images/guest/heia_thumb.gif" title="[偷笑]"></li>
+                            <li><img src="../images/guest/qq_thumb.gif" title="[亲亲]"></li>
+                            <li><img src="../images/guest/sb_thumb.gif" title="[生病]"></li>
+                            <li><img src="../images/guest/mb_thumb.gif" title="[太开心]"></li>
+                            <li><img src="../images/guest/ldln_thumb.gif" title="[懒得理你]"></li>
+                            <li><img src="../images/guest/yhh_thumb.gif" title="[右哼哼]"></li>
+                            <li><img src="../images/guest/zhh_thumb.gif" title="[左哼哼]"></li>
+                            <li><img src="../images/guest/x_thumb.gif" title="[嘘]"></li>
+                            <li><img src="../images/guest/cry.gif" title="[衰]"></li>
+                            <li><img src="../images/guest/wq_thumb.gif" title="[委屈]"></li>
+                            <li><img src="../images/guest/t_thumb.gif" title="[吐]"></li>
+                            <li><img src="../images/guest/k_thumb.gif" title="[打哈气]"></li>
+                            <li><img src="../images/guest/bba_thumb.gif" title="[抱抱]"></li>
+                            <li><img src="../images/guest/angrya_thumb.gif" title="[怒]"></li>
+                            <li><img src="../images/guest/yw_thumb.gif" title="[疑问]"></li>
+                            <li><img src="../images/guest/cza_thumb.gif" title="[馋嘴]"></li>
+                            <li><img src="../images/guest/88_thumb.gif" title="[拜拜]"></li>
+                            <li><img src="../images/guest/sk_thumb.gif" title="[思考]"></li>
+                            <li><img src="../images/guest/sweata_thumb.gif" title="[汗]"></li>
+                            <li><img src="../images/guest/sleepya_thumb.gif" title="[困]"></li>
+                            <li><img src="../images/guest/sleepa_thumb.gif" title="[睡觉]"></li>
+                            <li><img src="../images/guest/money_thumb.gif" title="[钱]"></li>
+                            <li><img src="../images/guest/sw_thumb.gif" title="[失望]"></li>
+                            <li><img src="../images/guest/cool_thumb.gif" title="[酷]"></li>
+                            <li><img src="../images/guest/hsa_thumb.gif" title="[花心]"></li>
+                            <li><img src="../images/guest/hatea_thumb.gif" title="[哼]"></li>
+                            <li><img src="../images/guest/gza_thumb.gif" title="[鼓掌]"></li>
+                            <li><img src="../images/guest/dizzya_thumb.gif" title="[晕]"></li>
+                            <li><img src="../images/guest/bs_thumb.gif" title="[悲伤]"></li>
+                            <li><img src="../images/guest/crazya_thumb.gif" title="[抓狂]"></li>
+                            <li><img src="../images/guest/h_thumb.gif" title="[黑线]"></li>
+                            <li><img src="../images/guest/yx_thumb.gif" title="[阴险]"></li>
+                            <li><img src="../images/guest/nm_thumb.gif" title="[怒骂]"></li>
+                            <li><img src="../images/guest/hearta_thumb.gif" title="[心]"></li>
+                            <li><img src="../images/guest/unheart.gif" title="[伤心]"></li>
+                            <li><img src="../images/guest/pig.gif" title="[猪头]"></li>
+                            <li><img src="../images/guest/ok_thumb.gif" title="[ok]"></li>
+                            <li><img src="../images/guest/ye_thumb.gif" title="[耶]"></li>
+                            <li><img src="../images/guest/good_thumb.gif" title="[good]"></li>
+                            <li><img src="../images/guest/no_thumb.gif" title="[不要]"></li>
+                            <li><img src="../images/guest/z2_thumb.gif" title="[赞]"></li>
+                            <li><img src="../images/guest/come_thumb.gif" title="[来]"></li>
+                            <li><img src="../images/guest/sad_thumb.gif" title="[弱]"></li>
+                            <li><img src="../images/guest/lazu_thumb.gif" title="[蜡烛]"></li>
+                            <li><img src="../images/guest/clock_thumb.gif" title="[钟]"></li>
+                            <li><img src="../images/guest/cake.gif" title="[蛋糕]"></li>
+                            <li><img src="../images/guest/m_thumb.gif" title="[话筒]"></li>
+                            <li><img src="../images/guest/weijin_thumb.gif" title="[围脖]"></li>
+                            <li><img src="../images/guest/lxhzhuanfa_thumb.gif" title="[转发]"></li>
+                            <li><img src="../images/guest/lxhluguo_thumb.gif" title="[路过这儿]"></li>
+                            <li><img src="../images/guest/bofubianlian_thumb.gif" title="[bofu变脸]"></li>
+                            <li><img src="../images/guest/gbzkun_thumb.gif" title="[gbz困]"></li>
+                            <li><img src="../images/guest/boboshengmenqi_thumb.gif" title="[生闷气]"></li>
+                            <li><img src="../images/guest/chn_buyaoya_thumb.gif" title="[不要啊]"></li>
+                            <li><img src="../images/guest/daxiongleibenxiong_thumb.gif" title="[dx泪奔]"></li>
+                            <li><img src="../images/guest/cat_yunqizhong_thumb.gif" title="[运气中]"></li>
+                            <li><img src="../images/guest/youqian_thumb.gif" title="[有钱]"></li>
+                            <li><img src="../images/guest/cf_thumb.gif" title="[冲锋]"></li>
+                            <li><img src="../images/guest/camera_thumb.gif" title="[照相机]"></li>
+                        </ul>
+                    </div>
+                    <!--face end-->
+                </div>
+            </div>
+            <!--qq end-->
+            <!--回复开始-->
+            <div id="pp">
+                <p>您想回复什么?</p>
+                <div class="remessage" contentEditable='true'></div>
+                <div class="reBut">
+                    <img src="../images/guest/bba_thumb.gif" class='rebq'/>
+                    <span class='resubmit' onclick="breplay()">回复</span>
+                    <!--face begin-->
+                    <div class="reface">
+                        <ul>
+                            <li><img src="../images/guest/zz2_thumb.gif" title="[织]" ></li>
+                            <li><img src="../images/guest/horse2_thumb.gif" title="神马]"></li>
+                            <li><img src="../images/guest/fuyun_thumb.gif" title="[浮云]"></li>
+                            <li><img src="../images/guest/geili_thumb.gif" title="[给力]"></li>
+                            <li><img src="../images/guest/wg_thumb.gif" title="[围观]"></li>
+                            <li><img src="../images/guest/vw_thumb.gif" title="[威武]"></li>
+                            <li><img src="../images/guest/panda_thumb.gif" title="[熊猫]"></li>
+                            <li><img src="../images/guest/rabbit_thumb.gif" title="兔子]"></li>
+                            <li><img src="../images/guest/otm_thumb.gif" title="[奥特曼]"></li>
+                            <li><img src="../images/guest/j_thumb.gif" title="[囧]"></li>
+                            <li><img src="../images/guest/hufen_thumb.gif" title="[互粉]"></li>
+                            <li><img src="../images/guest/liwu_thumb.gif" title="[礼物]"></li>
+                            <li><img src="../images/guest/smilea_thumb.gif" title="呵呵]"></li>
+                            <li><img src="../images/guest/tootha_thumb.gif" title="嘻嘻]"></li>
+                            <li><img src="../images/guest/laugh.gif" title="[哈哈]"></li>
+                            <li><img src="../images/guest/tza_thumb.gif" title="[可爱]"></li>
+                            <li><img src="../images/guest/kl_thumb.gif" title="[可怜]"></li>
+                            <li><img src="../images/guest/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+                            <li><img src="../images/guest/cj_thumb.gif" title="[吃惊]"></li>
+                            <li><img src="../images/guest/shamea_thumb.gif" title="[害羞]"></li>
+                            <li><img src="../images/guest/zy_thumb.gif" title="[挤眼]"></li>
+                            <li><img src="../images/guest/bz_thumb.gif" title="[闭嘴]"></li>
+                            <li><img src="../images/guest/bs2_thumb.gif" title="[鄙视]"></li>
+                            <li><img src="../images/guest/lovea_thumb.gif" title="[爱你]"></li>
+                            <li><img src="../images/guest/sada_thumb.gif" title="[泪]"></li>
+                            <li><img src="../images/guest/heia_thumb.gif" title="[偷笑]"></li>
+                            <li><img src="../images/guest/qq_thumb.gif" title="[亲亲]"></li>
+                            <li><img src="../images/guest/sb_thumb.gif" title="[生病]"></li>
+                            <li><img src="../images/guest/mb_thumb.gif" title="[太开心]"></li>
+                            <li><img src="../images/guest/ldln_thumb.gif" title="[懒得理你]"></li>
+                            <li><img src="../images/guest/yhh_thumb.gif" title="[右哼哼]"></li>
+                            <li><img src="../images/guest/zhh_thumb.gif" title="[左哼哼]"></li>
+                            <li><img src="../images/guest/x_thumb.gif" title="[嘘]"></li>
+                            <li><img src="../images/guest/cry.gif" title="[衰]"></li>
+                            <li><img src="../images/guest/wq_thumb.gif" title="[委屈]"></li>
+                            <li><img src="../images/guest/t_thumb.gif" title="[吐]"></li>
+                            <li><img src="../images/guest/k_thumb.gif" title="[打哈气]"></li>
+                            <li><img src="../images/guest/bba_thumb.gif" title="[抱抱]"></li>
+                            <li><img src="../images/guest/angrya_thumb.gif" title="[怒]"></li>
+                            <li><img src="../images/guest/yw_thumb.gif" title="[疑问]"></li>
+                            <li><img src="../images/guest/cza_thumb.gif" title="[馋嘴]"></li>
+                            <li><img src="../images/guest/88_thumb.gif" title="[拜拜]"></li>
+                            <li><img src="../images/guest/sk_thumb.gif" title="[思考]"></li>
+                            <li><img src="../images/guest/sweata_thumb.gif" title="[汗]"></li>
+                            <li><img src="../images/guest/sleepya_thumb.gif" title="[困]"></li>
+                            <li><img src="../images/guest/sleepa_thumb.gif" title="[睡觉]"></li>
+                            <li><img src="../images/guest/money_thumb.gif" title="[钱]"></li>
+                            <li><img src="../images/guest/sw_thumb.gif" title="[失望]"></li>
+                            <li><img src="../images/guest/cool_thumb.gif" title="[酷]"></li>
+                            <li><img src="../images/guest/hsa_thumb.gif" title="[花心]"></li>
+                            <li><img src="../images/guest/hatea_thumb.gif" title="[哼]"></li>
+                            <li><img src="../images/guest/gza_thumb.gif" title="[鼓掌]"></li>
+                            <li><img src="../images/guest/dizzya_thumb.gif" title="[晕]"></li>
+                            <li><img src="../images/guest/bs_thumb.gif" title="[悲伤]"></li>
+                            <li><img src="../images/guest/crazya_thumb.gif" title="[抓狂]"></li>
+                            <li><img src="../images/guest/h_thumb.gif" title="[黑线]"></li>
+                            <li><img src="../images/guest/yx_thumb.gif" title="[阴险]"></li>
+                            <li><img src="../images/guest/nm_thumb.gif" title="[怒骂]"></li>
+                            <li><img src="../images/guest/hearta_thumb.gif" title="[心]"></li>
+                            <li><img src="../images/guest/unheart.gif" title="[伤心]"></li>
+                            <li><img src="../images/guest/pig.gif" title="[猪头]"></li>
+                            <li><img src="../images/guest/ok_thumb.gif" title="[ok]"></li>
+                            <li><img src="../images/guest/ye_thumb.gif" title="[耶]"></li>
+                            <li><img src="../images/guest/good_thumb.gif" title="[good]"></li>
+                            <li><img src="../images/guest/no_thumb.gif" title="[不要]"></li>
+                            <li><img src="../images/guest/z2_thumb.gif" title="[赞]"></li>
+                            <li><img src="../images/guest/come_thumb.gif" title="[来]"></li>
+                            <li><img src="../images/guest/sad_thumb.gif" title="[弱]"></li>
+                            <li><img src="../images/guest/lazu_thumb.gif" title="[蜡烛]"></li>
+                            <li><img src="../images/guest/clock_thumb.gif" title="[钟]"></li>
+                            <li><img src="../images/guest/cake.gif" title="[蛋糕]"></li>
+                            <li><img src="../images/guest/m_thumb.gif" title="[话筒]"></li>
+                            <li><img src="../images/guest/weijin_thumb.gif" title="[围脖]"></li>
+                            <li><img src="../images/guest/lxhzhuanfa_thumb.gif" title="[转发]"></li>
+                            <li><img src="../images/guest/lxhluguo_thumb.gif" title="[路过这儿]"></li>
+                            <li><img src="../images/guest/bofubianlian_thumb.gif" title="[bofu变脸]"></li>
+                            <li><img src="../images/guest/gbzkun_thumb.gif" title="[gbz困]"></li>
+                            <li><img src="../images/guest/boboshengmenqi_thumb.gif" title="[生闷气]"></li>
+                            <li><img src="../images/guest/chn_buyaoya_thumb.gif" title="[不要啊]"></li>
+                            <li><img src="../images/guest/daxiongleibenxiong_thumb.gif" title="[dx泪奔]"></li>
+                            <li><img src="../images/guest/cat_yunqizhong_thumb.gif" title="[运气中]"></li>
+                            <li><img src="../images/guest/youqian_thumb.gif" title="[有钱]"></li>
+                            <li><img src="../images/guest/cf_thumb.gif" title="[冲锋]"></li>
+                            <li><img src="../images/guest/camera_thumb.gif" title="[照相机]"></li>
+                        </ul>
+                    </div>
+                    <!--face end-->
+                </div>
+            </div>
+            <!--回复结束-->
+            <!--msgCon begin-->
+            <ul class="msgCon">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!--content end-->
+
+<!--footer start-->
+<footer>
+    <p><a href="#">刘政版权所有</a> | <a href="#">鄂ICP备18011301号</a> | Copyright &copy;2018</p>
+    <p>地址：中国·湖北·鄂州 | 邮编：436000 | 邮箱:lz12538@163.com QQ:395417752</p>
+    <p>版权声明：凡注明本站原创文章、作品，未经本人许可，任何人或机构不得以任何形式对本站内容进行复制作商业用途.
+        本站部分文章、资源来自互联网，版权归原作者及网站所有，如果侵犯了您的权利，请及时致信告知我站.</p>
+    <p id="startDate"></p>
+</footer>
+<!--footer end-->
+<script src="../js/jquery-1.9.0.min.js"></script>
+<script src="../js/public.js"></script>
+<script src="../js/guest.js"></script>
+</body>
+</html>

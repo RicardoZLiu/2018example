@@ -1,0 +1,123 @@
+.content {
+    width: 100%;
+    margin-top: 20px;
+}
+.person-content {
+	width: 100%;
+	background: rgba(255,255,255,0.8);
+	text-align: center;
+	color:#000;
+	padding-bottom:20px;
+}
+.person-content h2 {
+	font-size: 18px;
+	font-weight:bold;
+	padding-top: 20px;
+}
+.person-content p {
+	font-size: 16px;
+	line-height: 30px;
+}
+.person-content p img {
+	cursor: pointer;
+	margin:10px 30px;
+	width: 100px;
+	height: 100px;
+	border-radius:50%;
+	padding:10px;
+}
+.person-content p input {
+	width: 200px;
+	line-height:30px;
+	background:#6b6b6b;
+	color:#fff;
+	font-size: 16px;
+	cursor:pointer;
+}
+.person-content p input:hover {
+	background:#000;
+}
+
+
+.welfare {
+	margin-right: -13px;
+	text-align:left;
+}
+.welfare li{
+	float: left;
+	width: 300px;
+	height: 240px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+	background: rgba(255,255,255,0.6);
+	margin: 20px 13px 0 0;
+	color: #000;
+}
+.welfare h4 a {
+	color:#6b6b6b;
+	font-size: 18px;
+	font-weight: bold;
+}
+.welfare h4 a:hover {
+	color: #000;
+}
+.welfare p {
+	padding-top:10px;
+	line-height: 25px;
+}
+.wel-img {
+	display: block;
+	width: 100%;
+	height: 120px;
+	position: relative;
+	overflow: hidden;
+}
+.wel-img img {
+	display: block;
+	width: 300px;
+	height: 130px;
+	transition: all 0.8s ease 0s;
+}
+.wel-img img:hover {
+	transform:scale(1.2);
+}
+.wel-inner {
+	padding: 11px 15px 0;
+}
+
+.share {
+	width: 100%;
+	position: relative;
+}
+.share div {
+	width: 150px;
+	display: none;
+	position: absolute;
+	z-index: 999;
+	top: -140px;
+	text-align:center;
+}
+.weixin {	
+	left: 74%;
+}
+.qq {
+	left: 14%;
+}
+.weibo {
+	left: 44%;
+}
+.share .email {
+	border-radius: 8%;
+	line-height: 50px;
+	background:#fff;
+	font-size:16px;
+	left: 29%;
+	top: -40px;
+}
+.share .github {
+	border-radius: 8%;
+	line-height: 50px;
+	background:#fff;
+	font-size:16px;
+	left: 59%;
+	top: -40px;
+}

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="刘政，网络，前端，技术，博客">
+    <meta name="description" content="刘政的个人网站，记录生活中的点点滴滴，分享学习心得，感悟生活">
+    <title>网页小游戏</title>
+    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/index.css">
+</head>
+<body>
+<!--header start-->
+<header id="header">
+    <!--top start-->
+    <div class="top">
+        <div class="top-inner layout">
+            <div class="logo">
+                <a href="/">冰菓</a>
+            </div>
+            <!--main-nav start-->
+            <div class="main-nav">
+                <ul class="nav-inner">
+                    <li>
+                        <a onclick="window.location.href='../../index.html'">首页<span>HOME</span></a>
+                    </li>
+                    <li>
+                        <a href="#">生活笔记<span>STORY</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='../story/essay.html'">个人随笔</a></li>
+                            <li><a onclick="window.location.href='../story/diary.html'">个人日记</a></li>
+                            <li><a onclick="window.location.href='../story/exhibition.html'">个人展示</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">学习之路<span>STUDY</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='../study/hcnote.html'">HTML&CSS</a></li>
+                            <li><a onclick="window.location.href='../study/JSnote.html'">JS&JQ</a></li>
+                            <li><a onclick="window.location.href='../study/hfctnote.html'">HTML5&CSS3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a onclick="window.location.href='../aboutUs.html'">关于自己<span>ABOUT US</span></a>
+                    </li>
+                    <li>
+                        <a onclick="window.location.href='../guest.html'">给我留言<span>GUESTBOOK</span></a>
+                    </li>
+                    <li>
+                        <a href="#">特效案例<span>EXAMPLE</span></a>
+                        <ul>
+                            <li><a onclick="window.location.href='game.html'">游戏</a></li>
+                            <li><a onclick="window.location.href='love.html'">表白</a></li>
+                            <li><a onclick="window.location.href='other.html'">其他</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="sub_nav"></div>
+            </div>
+            <!--main-nav end-->
+            <div class="top-right">
+                <!--登录-->
+                <div class="user" id="loginUser">
+                    <div class="icon-user"></div>
+                    <a href="#">登录</a>
+                </div>
+                <!--注册-->
+                <div class="login">
+                    <div class="icon-login"></div>
+                    <a href="#">注册</a>
+                </div>
+                <form>
+                    <div class="login-mask" id="loginMask">
+                        <div class="loginbox" id="loginBox">
+                            <div class="login-title"><h2>用户登录</h2></div>
+                                <ul class="login-body">
+                                    <li>
+                                        <input type="text" placeholder="登录账号" autofocus>
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="登录密码">
+                                    </li>
+                                    <li>
+                                        <input type = "text" placeholder="请输入验证码" id = "lginput" value="" onBlur="lgvalidate()" />  
+                                        <input type = "button" id="lgcode" onclick="lgcreateCode()"/> 
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="登录" class="blue">
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="注册" class="blue regester">
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="管理员登录" class="blue">
+                                    </li>
+                                </ul>
+                        </div>
+                         <div class="loginbox" id="regesterBox">
+                            <div class="login-title"><h2>用户注册</h2></div>
+                                <ul class="login-body">
+                                    <li>
+                                        <input type="text" placeholder="登录账号" autofocus>
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="登录密码">
+                                    </li>
+                                    <li>
+                                        <input type="password" placeholder="再输入一次密码">
+                                    </li>
+                                    <li>
+                                        <input type="email" placeholder="请输入邮箱">
+                                    </li>                                    
+                                    <li>
+                                        <input type = "text" placeholder="请输入验证码" id = "yzinput" value="" onBlur="yzvalidate()"/>  
+                                        <input type = "button" id="yzcode" onclick="yzcreateCode()"/> 
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="注册完成" class="blue">
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </form>
+                <!--搜索框-->
+                <div class="search">
+                    <input type="text" class="search"  placeholder="Search..." autofocus value="">
+                    <div class="icon-search"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--top end-->
+    <!--换肤开始-->
+    <div class="banner clearfix" id="banner">
+        <img src="../../images/bodyBg/bodyBg1.jpg" alt="派大星"/>
+        <img src="../../images/bodyBg/bodyBg2.jpg" alt="I am OK！"/>
+        <img src="../../images/bodyBg/bodyBg3.jpg" alt="小熊"/>
+        <img src="../../images/bodyBg/bodyBg4.jpg" alt="方块"/>
+        <img src="../../images/bodyBg/bodyBg5.jpg" alt="厕所"/>
+    </div>
+    <!--换肤结束-->
+</header>
+<!--header end-->
+<!--content start-->
+<div class="content clearfix">
+    <div class="content-inner layout" style="display: block">
+        <h1>您所在的位置是：<a onclick="window.location.href='../../index.html'">首页</a> &gt; <a href="#">特效案例</a> &gt; <a href="#">游戏</a></h1>
+        <ul class="welfare">
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+            <li>
+                <a class="wel-img" href="#">
+                    <img src="../../images/study/angular.jpg" height="130" width="240" />
+                </a>
+                <div class="wel-inner">
+                    <h4>
+                        <a href="#">贪吃蛇</a>
+                    </h4>
+                    <p class="wel-date">发布时间：2018-6-1</p>
+                    <p>JavaScript制作的一个贪吃蛇小游戏</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--content end-->
+
+<!--footer start-->
+<footer>
+    <p><a href="#">刘政版权所有</a> | <a href="#">鄂ICP备18011301号</a> | Copyright &copy;2018</p>
+    <p>地址：中国·湖北·鄂州 | 邮编：436000 | 邮箱:lz12538@163.com QQ:395417752</p>
+    <p>版权声明：凡注明本站原创文章、作品，未经本人许可，任何人或机构不得以任何形式对本站内容进行复制作商业用途.
+        本站部分文章、资源来自互联网，版权归原作者及网站所有，如果侵犯了您的权利，请及时致信告知我站.</p>
+    <p id="startDate"></p>
+</footer>
+<!--footer end-->
+<script src="../../js/jquery-1.9.0.min.js"></script>
+<script src="../../js/public.js"></script>
+</body>
+</html>
