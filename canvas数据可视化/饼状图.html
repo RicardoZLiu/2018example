@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+        <style type="text/css">
+            canvas {
+                border: 1px solid #ccc;
+                display: block;
+                margin: 50px auto;
+            }
+        </style>
+    <body>
+        <canvas width="600" height="600"></canvas>
+        <script type="text/javascript">
+/*        绘制饼状图
+            1.根据数据绘制一个饼图
+            2.绘制标题
+            3.绘制文字说明*/
+
+
+            // 1.构造函数
+                var PieChart = function(ctx){
+                    this.ctx = ctx || document.querySelector('canvas').getContext('2d');
+                    //饼图中心
+                    this.x0 = this.ctx.canvas.width/2 + 60;
+                    this.y0 = this.ctx.canvas.height/2;
+                    //半径 
+                    this.radius = 150;
+                    //标题伸出去的线长
+                    this.outline = 20;
+                    //说明的矩形大小
+                    this.rectW = 30;
+                    this.rectH = 16;
+                    this.space = 20;
+                }
+            // 2.行为和方法
+                // 入口函数
+                PieChart.prototype.init = function(data){
+                    this.drawPie(data);
+                }
+                //绘制饼图
+                PieChart.prototype.drawPie = function(data){
+                    var that = this;
+                    var angleList = this.transformAngle(data);
+                    var startAngle = 0;
+                    angleList.forEach(function (item,i){
+                        var endAngle = item.angle + startAngle;
+                        that.ctx.beginPath();
+                        that.ctx.moveTo(that.x0, that.y0)
+                        that.ctx.arc(that.x0,that.y0,that.radius,startAngle,endAngle);
+                        var color = that.getPieColor();
+                        that.ctx.fillStyle = color;
+                        that.ctx.fill();
+                        //绘制标题
+                        that.drawTitle(startAngle,item.angle,color,item.title);
+                        that.drawDescript(i,item.title);
+                        startAngle = endAngle;
+                    })
+                }
+                //绘制标题
+                PieChart.prototype.drawTitle = function(startAngle,angle,color,title){
+                    //伸出去的线终点坐标(outlinex,outliney)
+                    //outlinex = this.x0 + (this.radius + this.outline) * cos(弧度)
+                    //outliney = this.y0 + (this.radius + this.outline) * cos(弧度)
+                    //因为弧度从0开始，所以    弧度 = 当前起始弧度 + 当前弧度的一半
+                    var edgX = (this.radius + this.outline) * Math.cos(startAngle + angle/2);
+                    var edgY = (this.radius + this.outline) * Math.sin(startAngle + angle/2);  
+                    var outlineX = this.x0 + edgX;
+                    var outlineY = this.y0 + edgY;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.x0, this.y0);
+                    this.ctx.lineTo(outlineX, outlineY);
+                    this.ctx.strokeStyle = color;
+                    this.ctx.stroke();
+
+                    //绘制文字和下划线  注意文字对齐是相对于点坐标(outlinex,outliney)
+                    this.ctx.font = '14px Microsoft YaHei';
+                    var textWidth = this.ctx.measureText(title).width;
+                    if(outlineX > this.x0){
+                        this.ctx.lineTo(outlineX+textWidth, outlineY);
+                        this.ctx.textAlign = 'left';
+                    }else {
+                        this.ctx.lineTo(outlineX-textWidth, outlineY);
+                        this.ctx.textAlign = 'right';
+                    }
+                    this.ctx.textBaseline = 'bottom';
+                    this.ctx.stroke();
+                    this.ctx.fillText(title, outlineX, outlineY);
+                }
+                //绘制说明
+                PieChart.prototype.drawDescript = function(index,title){
+                    // 矩形离x轴的间距为space 离y轴的间距为（矩形个数-1)*矩形高度+space/2
+                    this.ctx.fillRect(this.space, index*this.space+this.rectH, this.rectW, this.rectH);
+                    // 绘制文字
+                    this.ctx.beginPath();
+                    this.ctx.textAlign = 'left';
+                    this.ctx.textBaseline = 'top';
+                    this.ctx.font = '12px Microsoft YaHei';
+                    this.ctx.fillText(title, this.space+this.rectW+this.space/2, index*this.space+this.rectH);
+                }
+                //角度转换为弧度
+                PieChart.prototype.transformAngle = function(data){
+                    var total = 0;
+                    data.forEach(function(item,i){
+                        total += item.num;
+                    })
+                    data.forEach(function(item,i){
+                        var angle = item.num/total * Math.PI*2;
+                        item.angle = angle;
+                    })
+                    return data;
+                }
+                //饼状图颜色
+                PieChart.prototype.getPieColor = function(){
+                    var r = Math.floor(Math.random()*256);
+                    var g = Math.floor(Math.random()*256);
+                    var b = Math.floor(Math.random()*256);
+                    return 'rgb('+r+','+g+','+b+')';
+                }
+            // 3.初始化
+                var data = [
+                    {
+                        title: '15-20岁',
+                        num: 6
+                    },
+                    {
+                        title: '20-25岁',
+                        num: 30
+                    },
+                    {
+                        title: '25-30岁',
+                        num: 10
+                    },
+                    {
+                        title: '30以上',
+                        num: 8
+                    }
+                ];
+
+                var pieChart = new PieChart();
+                pieChart.init(data);
+        </script>
+    </body>
+</html>

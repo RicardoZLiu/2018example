@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+        <style type="text/css">
+            canvas {
+                border: 1px solid #ccc;
+                display: block;
+                margin: 50px auto;
+            }
+        </style>
+    <body>
+        <canvas width="600" height="600"></canvas>
+        <script type="text/javascript">
+            // 1.构造函数
+            var Person = function(ctx){
+                this.ctx = ctx || document.querySelector('canvas').getContext('2d');
+                this.src = 'image/01.png';
+                //画布的大小
+                this.canvasW = this.ctx.canvas.width;
+                this.canvasH = this.ctx.canvas.height;
+
+                //行走的步伐
+                this.stepSize = 10;
+                //默认行走的方向  0代表前  1代表左  2代表右  3代表后  和图片的小人行数对应上
+                this.direction = 0;
+                //控制人物行走的状态
+                this.index = 0;
+                //图片在改变 图片的定位在改变
+                //x和y轴方向的偏移步数
+                this.stepX = 0;
+                this.stepY = 0;
+            }
+            // 2.方法和属性
+            Person.prototype.init = function(){
+                var that = this;
+                this.loadImage(function(image){
+                    //获取图片大小
+                    that.imageW = image.width;
+                    that.imageH = image.height;
+                    //人物的大小
+                    that.personW = that.imageW / 4;
+                    that.personH = that.imageH / 4;
+                    //绘制图片起点
+                    that.x0 = that.canvasW/2 -  that.personW/2;
+                    that.y0 = that.canvasH/2 -  that.personH/2;
+
+                    that.ctx.drawImage(image, 0, 0, that.personW, that.personH, that.x0, that.y0, that.personW, that.personH);
+
+                    //方向键控制人物行走
+                    // 不论按哪个键都要绘制图片
+                    document.onkeydown = function(e){
+                        // console.log(e.keyCode);
+                        if(e.keyCode == 37){
+                            //左
+                            that.direction = 1;
+                            that.stepX--;
+                            that.paintImage(image);
+                        }else if(e.keyCode == 38){
+                            //上
+                            that.direction = 3;
+                            that.stepY--;
+                            that.paintImage(image);
+                        }else if(e.keyCode == 39){
+                            //右
+                            that.direction = 2;
+                            that.stepX++;
+                            that.paintImage(image);
+                        }else if(e.keyCode == 40){
+                            //下
+                            that.direction = 0;
+                            that.stepY++;
+                            that.paintImage(image);
+                        }
+                    }
+                })
+
+            }
+            //加载图片
+            Person.prototype.loadImage = function(callback){
+                var image = new Image();
+                image.onload = function(){
+                    callback && callback(image);
+                }
+                image.src = this.src;
+            }
+            //绘制图片
+            Person.prototype.paintImage = function(image){
+                this.index++;
+                // 清除画布
+                this.ctx.clearRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height);
+                this.ctx.drawImage(image,
+                 this.index*this.personW, this.direction*this.personH, 
+                 this.personW, this.personH, 
+                 this.x0 + this.stepX*this.stepSize, this.y0+this.stepY*this.stepSize, 
+                 this.personW, this.personH);
+                if(this.index>=3){
+                    this.index = 0;
+                }
+            }
+            // 3.初始化
+            var person = new Person();
+            person.init();
+        </script>
+    </body>
+</html>

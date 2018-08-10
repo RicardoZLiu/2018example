@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+        <style type="text/css">
+            canvas {
+                border: 1px solid #ccc;
+                display: block;
+                margin: 50px auto;
+            }
+        </style>
+    <body>
+        <canvas width="600" height="600"></canvas>
+        <script type="text/javascript">
+            var ctx = document.querySelector('canvas').getContext('2d');
+
+            var img = new Image();
+            img.onload = function(){
+                // 图片加载完成
+                // 获取图片宽高
+                var imgW = img.width;
+                var imgH = img.height;
+                // 计算小人大小
+                var personW = imgW/4;
+                var personH = imgH/4;
+                //图片位置
+                var x0 = ctx.canvas.width/2 - personW/2;
+                var y0 = ctx.canvas.height/2 - personH/2;
+                //固定时间跟换图片
+                var index = 0;
+
+                ctx.drawImage(img, 0, 0, personW, personH, x0, y0, personW, personH);
+                setInterval(function(){
+                    index++;
+                    ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+                    ctx.drawImage(img, index*personW, 0, personW, personH, x0, y0, personW, personH);
+                    if(index>=3){
+                        index = 0;
+                    }
+                },100)
+            }
+            img.src = 'image/01.png';
+        </script>
+    </body>
+</html>
