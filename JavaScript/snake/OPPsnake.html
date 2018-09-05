@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style type="text/css">
+        body,p,div {
+            margin: 0;
+            padding: 0;
+        }
+        #text {
+            width: 300px;
+            height: 500px;
+            float: left;
+        }
+        #text p {
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: #6b6b6b;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        #box {
+            width: 900px;
+            height: 700px;
+            background: green;            
+            margin: 20px auto;
+            position: relative;
+        }
+        .snake{
+          position:absolute;}
+        .snake div{
+          width:20px;
+          height:20px;
+          background:#ccc;
+          position:absolute;
+          z-index:1;}
+    </style>
+    <script type="text/javascript">
+    window.onload = function(){
+        //创建表格============================================================
+        var oBox = document.querySelector('#box');
+        var oSnake = oBox.children[0];
+
+        var snake_arr = [];
+        //创建蛇,随机产生食物===================================================
+        for(var i=0;i<5;i++){
+            var snake_body = document.createElement('div');
+            //设置蛇头
+            if(i==0){
+               snake_body.style.background = 'red'; 
+               snake_body.style.zIndex = '2';
+            }
+            oSnake.appendChild(snake_body);
+            snake_arr[i] = {h:10,l:15+i,div:snake_body};
+            setPos(snake_arr[i]);
+        }
+        var oSnakes = oSnake.children[0];
+        var Col = oBox.offsetWidth / oSnakes.offsetWidth;
+        var Row = oBox.offsetHeight / oSnakes.offsetHeight;
+        
+        var aFood = [];
+        function creatFood(){
+            var food_R = parseInt(Math.random()*Row);
+            var food_C = parseInt(Math.random()*Col);
+
+            //食物位置不能和蛇位置重合
+            var flag = true;
+            for(var i=0;i<snake_arr.length;i++){
+                if(food_C == snake_arr[i].l && food_R == snake_arr[i].h){
+                    flag = false;
+                }
+            };
+            if(flag){
+                var food_div = document.createElement('div');
+                food_div.style.position = 'absolute';
+                food_div.style.width = '20px';
+                food_div.style.height = '20px';
+                food_div.style.background = 'purple';
+                aFood.push({h:food_R,l:food_C,div:food_div});
+                setPos(aFood[0]);
+    
+                oBox.appendChild(food_div);
+            }
+        }
+        creatFood();
+        //让蛇移动====================================================================
+        //默认移动方向
+        var move = 'left';
+        var timer = null;
+        //默认难度
+        var time_arr=[200];
+        //分数 和  难度
+        var num = document.querySelector('#num');
+        var n1 = num.children[0];   
+        var n2 = num.children[2];
+        var n1_num = 0;
+        var n2_num = 0;
+        function startMove(){
+            timer = setTimeout(function(){
+                //撞墙或者撞自己执行
+                function strick(){
+                    clearInterval(timer);
+                    return;
+                }
+
+                //判断撞墙 
+                if(snake_arr[0].h<0 || snake_arr[0].h>Row-20 || snake_arr[0].l<0 || snake_arr[0].l>Col-20){
+                    confirm("Game Over");
+                    strick();
+                    location.reload();
+                }
+
+                //判断撞自己
+                for(var i=1;i<snake_arr.length;i++){
+                    if(snake_arr[0].l == snake_arr[i].l && snake_arr[0].h == snake_arr[i].h){
+                       confirm("Game Over");
+                        strick();
+                        location.reload(); 
+                    }
+                }
+
+                //判断吃没吃到
+                if(snake_arr[0].l == aFood[0].l && snake_arr[0].h == aFood[0].h){
+                    n1_num++;
+                    //每吃十个加1难度
+                    if(n1_num>=10){
+                        n2_num++;
+                        n1_num = 0;
+                    }
+                    console.log(n2_num);
+                    n1.innerHTML = n1_num;
+                    n2.innerHTML = n2_num;
+
+                    //最大难度为4
+                    if(n2_num>4){
+                        n2_num=4;
+                    }
+
+                    //吃到食物蛇长度加一
+                    snake_arr.splice(snake_arr.length-1, 0, aFood[0]);
+                    for(var i=1;i<snake_arr.length;i++){
+                        snake_arr[i].div.style.background = '#ccc';
+                    }
+                    aFood.pop();
+                    creatFood();
+                }
+
+                //移动
+                for(var i=snake_arr.length-1;i>0;i--){
+                    snake_arr[i].l = snake_arr[i-1].l;
+                    snake_arr[i].h = snake_arr[i-1].h;
+                }
+                switch(move){
+                    case 'left':
+                    snake_arr[0].l--;
+                    break;
+                    case 'right':
+                    snake_arr[0].l++;
+                    break;
+                    case 'top':
+                    snake_arr[0].h--;
+                    break;
+                    case 'bottom':
+                    snake_arr[0].h++;
+                    break;
+                }
+                for(var i=0;i<snake_arr.length;i++){
+                    setPos(snake_arr[i]);
+                };
+                startMove();
+                time_arr[0]=200-n2_num*30;
+            }, time_arr[0])
+        }
+        //绑定键盘按键===================================================================
+         //37左 39右 38上 40下 32空格  83 S键
+         document.onkeydown = function(e){
+            var oEvent = e || event;
+            var okeyCode = oEvent.keyCode;
+            if(okeyCode == 37 && move!='right'){
+                move = 'left';
+            }else if(okeyCode == 39 && move!='left'){
+                move = 'right';
+            }else if(okeyCode == 38 && move!='bottom'){
+                move = 'top';
+            }else if(okeyCode == 40 && move!='top'){
+                move = 'bottom';
+            }
+            if(oEvent.keyCode==32)
+            {
+                clearInterval(timer);
+                startMove();
+            };
+            if(oEvent.keyCode==83)
+            {
+                clearInterval(timer);
+            };
+         }
+        //设置蛇的坐标====================================================================
+        function setPos(obj){
+            obj.div.style.left = obj.l*20+'px';
+            obj.div.style.top = obj.h*20+'px';
+        }
+        //按空格开始
+        document.onkeyup=function(e)
+        {
+          var oEvent=e||event;
+          
+          if(oEvent.keyCode==32)
+          {
+            clearInterval(timer);
+            startMove();
+          };
+        };
+        
+    }
+    </script>
+    <body>
+        <div id="text">
+            <p>上下左右键控制方向</p>
+            <p>空格键：开始</p>
+            <p>S键：暂停</p>
+            <p></p>
+            <p id="num">
+                分数：<span>0</span><br />
+                难度：<span>0</span>
+            </p>
+        </div>
+        
+        <div id="box">
+            <div class="snake"></div>
+        </div>
+    </body>
+</html>
