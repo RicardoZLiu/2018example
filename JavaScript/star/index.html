@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style type="text/css">
+        html,body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+        #sky {
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+    </style>
+    <body>
+        <div id="sky"></div>
+        <script type="text/javascript">
+            //星星有宽高， 会闪烁
+            function Star(){
+                this.width = 7;
+                this.height = 7;
+            }
+            Star.prototype.init = function(sky){
+                this.drawStar(sky);
+            }
+            Star.prototype.drawStar = function(sky){
+                var ostar = document.createElement('div');
+                ostar.style.width = this.width+'px';
+                ostar.style.height = this.height+'px';
+                ostar.style.overflow = 'hidden';
+                ostar.style.position = 'absolute';
+                ostar.style.left = Math.floor(Math.random()*sky.clientWidth)+'px';
+                ostar.style.top = Math.floor(Math.random()*sky.clientHeight)+'px';
+                sky.appendChild(ostar);
+                var oImg = document.createElement('img');
+                oImg.style.width = '49px';
+                oImg.style.height = '7px';
+                oImg.src = 'images/star.png';
+                oImg.style.position = 'absolute';
+                oImg.style.top = 0;
+                ostar.appendChild(oImg);
+                this.blink(oImg);
+            } 
+            Star.prototype.blink = function(ele){
+                var i = Math.floor(Math.random()*7);
+                var timer = setInterval(function(){
+                    if(i<7){
+                        ele.style.left = -i*7+'px';
+                        i++;
+                    }else{
+                        i=0;
+                    }
+                }, 100);
+            }
+
+            var oSky = document.querySelector('#sky');
+            for(var i=0;i<30;i++){
+                var star = new Star();
+                star.init(oSky);
+            }        
+        </script>
+    </body>
+</html>

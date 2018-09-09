@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style type="text/css">
+        .gray {
+            background-color: #ccc;
+        }
+    </style>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <script type="text/javascript" src="lib/vue-resource.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            new Vue({
+                el: 'body',
+                data: {
+                    myData: [],
+                    t1: '',
+                    now: -1
+                },
+                methods: {
+                    get: function(e){
+                        if(e.keyCode==38 || e.keyCode==40) return;
+                        if(e.keyCode==13){
+                            window.open('https://www.baidu.com/s?wd='+ this.t1);
+                            this.t1 = '';
+                        }
+                        /*
+                           //get 
+                           this.$http.get(url,参数).then(function(res){
+                                alert(res.data)
+                           },function(err){
+                                alert(err)
+                           })
+                           //post
+                           this.$http.post(url,参数,{emulateJSON:true}).then(function(res){
+                                alert(res.data)
+                           },function(err){
+                                alert(err)
+                           })
+                           //jsonp
+                           this.$http.jsonp(url,{json},{json:'callback'}).then(function(res){
+                                alert(res.data)
+                           },function(err){
+                                alert(err)
+                           })
+                        */
+                        this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
+                            wd:this.t1
+                        },{
+                            jsonp:'cb'
+                        }).then(function(res){
+                            this.myData = res.data.s;
+                        },function(){})
+                    },
+                    changeDown: function(){
+                        this.now++;
+                        if(this.now==this.myData.length){
+                            this.now=-1;
+                        }
+                        this.t1 = this.myData[this.now];
+                    },
+                    changeUp: function(){
+                        this.now--;
+                        if(this.now == -2){
+                            this.now= this.myData.length-1;
+                        }
+                        this.t1 = this.myData[this.now];
+                    }
+                }
+            })
+        }
+    </script>
+    <body>
+        <input type="text" v-model="t1" @keyup="get($event)" @keydown.down="changeDown()" @keydown.up.prevent="changeUp()"/>
+        <ul>
+            <li v-for = "value in myData" :class="{gray:$index==now}">
+                {{ value }}
+            </li>
+        </ul>
+        <p v-show = "myData.length == 0">暂无数据</p>
+    </body>
+</html>

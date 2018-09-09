@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css" />
+    <script type="text/javascript" src="lib/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            new Vue({
+                el: '#box',
+                data: {
+                    myData: [],
+                    username: '',
+                    age: '',
+                    nowIndex: null,
+                    hint: ''
+                },
+                methods: {
+                    add: function(){
+                        if(this.name == '' || this.age == ''){
+                            alert("请输入信息再添加");
+                        }else{
+                            this.myData.push({
+                            username: this.username,
+                            age: this.age
+                        })
+                        }
+                        this.username = '';
+                        this.age = ''
+                    },
+                    deleteMsg: function(n){
+                        if(n==-2){
+                            this.myData = [];
+                        }else {
+                            this.myData.splice(n,1);
+                        }
+                    },
+                    deleteOne: function(index){
+                        this.nowIndex = index;
+                        this.hint = "您确定要删除吗？"                      
+                    },
+                    deleteAll: function(){
+                        this.nowIndex = -2;
+                        this.hint = "您确定要全部删除吗？"                        
+                    }
+                }
+            })
+        }
+    </script>
+    <body>
+        <div class="container" id="box">
+            <form role="form">
+                <div class="form-group">
+                    <label for="username">用户名:</label>
+                    <input type="text" class="form-control" id="username" placeholder = "请输入姓名" 
+                    v-model = "username" />
+                </div>
+                <div class="form-group">
+                    <label for="age">年龄：</label>
+                    <input type="text" class="form-control" id="age" placeholder = "请输入年龄" v-model = "age"/>
+                </div>
+                <div class="form-group">
+                    <input type="button"  value="添加" class="btn btn-primary" v-on:click = 'add()' />
+                    <input type="reset" value="重置" class="btn btn-danger" />
+                </div> 
+            </form>
+
+            <hr />
+
+            <table class="table table-bordered table-hover">
+                <caption class="h3 text-info">用户信息表</caption>
+                <tr>
+                    <th class="text-center">序号</th>
+                    <th class="text-center">姓名</th>
+                    <th class="text-center">年龄</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                <tr class="text-center" v-for="item in myData">
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer"
+                        v-on:click = "deleteOne($index)">删除</button>
+                    </td>
+                </tr>
+                <tr v-show = "myData.length !== 0">
+                    <td colspan="4" class="text-right"><button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#layer" v-on:click = "deleteAll()">删除全部</button></td>
+                </tr>
+                <tr v-show = "myData.length == 0">
+                    <td class="text-center text-muted" colspan="4"><p>暂无数据...</p></td>
+                </tr>
+            </table>
+
+            <!-- 模态框 -->
+            <div role="dialog" class="modal fade bs-example-modal-sm" id="layer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close  " data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title">{{ hint }}</h4>
+                        </div>
+                        <div class="modal-body text-right">
+                            <button data-dismiss="modal" class="btn btn-primary btn-sm">取消</button>
+                            <button data-dismiss="modal" class="btn btn-danger btn-sm" v-on:click = "deleteMsg(nowIndex)">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
