@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="marque">
+            <input type="button" value="移动" @click='lang' />
+            <input type="button" value="停止" @click='wen' />
+            <h4>{{msg}}</h4>
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: '#marque',
+                data: {
+                    msg: '每一个明天，都是一个新的期待~~',
+                    timer: null
+                },
+                methods: {
+                    lang(){
+                        if(this.timer != null) return;
+                        this.timer=setInterval(()=>{
+                            start = this.msg.substring(0,1)
+                            end = this.msg.substring(1)
+                            this.msg = end + start;
+                        }, 500)
+                    },
+                    wen(){
+                        clearInterval(this.timer)
+                        this.timer = null
+                    }
+                } 
+            })
+        </script>
+    </body>
+</html>
