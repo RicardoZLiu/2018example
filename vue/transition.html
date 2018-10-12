@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+        <style>
+          /*.v-enter,  这是一个时间点，是进入动画之前，元素的起始状态，此时还没有开始进入
+            .v-leave-to   这个是一个时间点，是元素离开动画之后，离开的终止状态，此时元素动画已经结束*/
+            .v-enter,  
+            .v-leave-to {
+                opacity: 0;
+                transform: translateX(180px);
+            }
+
+          /*.v-enter-active,  入场动画时间段
+            v-leave-active    离场动画时间段*/
+            .v-enter-active,
+            .v-leave-active {
+                transition: all ease 0.8s;
+            }
+
+            .my-enter,  
+            .my-leave-to {
+                opacity: 0;
+                transform: translateY(180px);
+            }
+
+            .my-enter-active,
+            .my-leave-active {
+                transition: all ease 0.8s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <input type="button" value="动画" @click="flag = !flag"/>
+            <!-- 使用transition元素，把需要被控制的动画包裹起来 -->
+            <transition>
+                <h3 v-if="flag">{{ msg }}</h3>
+            </transition>
+            <hr />
+
+            <input type="button" value="动画2" @click="flag2 = !flag2"/>
+            <!-- 使用 name 自定义v-前缀 ，区分不同组动画-->
+            <transition name="my">
+                <h6 v-if="flag2">这是一个H6</h6>
+            </transition>
+
+            <hr />
+            <input type="button" value="动画3" @click="flag3 = !flag3"/>
+            <!-- 使用第三方animate.css类似库实现动画   
+            :duration="毫秒值" 可以控制入场和离场时的动画时长
+            :duration={ enter: 200, leave: 400 } 可以分别控制入场和离场时的动画时长
+             -->
+            <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="600">
+                <h3 v-if="flag3" class="animated">{{ msg }}</h3>
+            </transition>            
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: '这是一个H3',
+                    flag: false,
+                    flag2: false,
+                    flag3: false
+                },
+                methods: {}
+            })
+        </script>
+    </body>
+</html>

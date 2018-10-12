@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ msg }}
+        </div>
+        <script type="text/javascript">
+            //开始创建一个vue实例对象
+            var vm = new Vue({ 
+                //初始化一个空的 Vue实例对象，这时候这个对象身上只有默认的一些生命周期函数 和 默认事件
+                el: "#app",
+                data: {
+                    msg: haha
+                },
+                methods: {
+                    show(){
+                        console.log('执行show方法')
+                    }
+                },
+                beforeCreate(){
+                    //第一个生命周期函数，表示实例完全被创建出来之前会执行他
+                    //此时 date 和 methods 中的数据还没有被初始化
+                },
+                created(){
+                    //第二个生命周期函数
+                    console.log(this.msg)
+                    this.show()
+                    //此时  date 和 methods 中的数据已经初始化好了
+                },
+                //vue开始编译模板，把vue中的代码指令进行执行，最终在内存中生成一个编译好的模板字符串，然后把这个模板字符串渲染为内存中的 DOM
+                beforeMount(){
+                    //第三个生命周期函数，表示模板已经在内存中编译好了，但是尚未渲染到页面,只是模板字符串   
+                },
+                //将内存中编译好的模板真实的替换到浏览器中去
+                mounted(){
+                    //第四个生命周期函数，表示内存中的模板已经挂载到页面中，用户已经可以看到渲染好的页面了
+                    //操作页面上的DOM节点
+                    //mounted是实例创建期间最后一个生命周期函数，当执行完这个函数时，实例就已经完全创建好了，组件脱离创建阶段，进入运行阶段
+                },
+
+
+                //运行阶段，当date被改变的时候执行下面两个函数
+                beforeUpdate(){
+                    //这时候界面还没有被更新，但是数据肯定被更新了
+                },
+                //先根据date中的最新数据，在内存中，重新渲染出一份新的DOM树
+                //当最新的内存 DOM数据 被更新之后，会重新渲染页面，，这时候就完成了从date（model）--->view的更新
+                updated(){
+                    //页面 和 date数据已经保持同步了，都是最新的
+                },
+
+                //销毁阶段
+                beforeDestroy(){
+                    //实例已经进入到了销毁阶段,实例身上所有的 date 、 methods 、指令、过滤器等都处于可用状态，此时还没有真正执行销毁过程
+                },
+                destroyed(){
+                    //实例身上所有的 date 、 methods 、指令、过滤器等都已经不可用了
+                }
+
+
+            })
+        </script>
+    </body>
+</html>

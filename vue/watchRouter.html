@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/login">登录</router-link>
+            <router-link to="/register">注册</router-link>
+            <router-view></router-view>
+        </div>
+        <script type="text/javascript">
+            var login = {
+                template: '<h3>这是登录页面</h3>'
+            }
+            var register = {
+                template: '<h3>这是注册页面</h3>'
+            }
+            var router = new VueRouter({
+                routes: [
+                    { path: '', redirect: '/login' },
+                    { path: '/login', component: login },
+                    { path: '/register', component: register }
+                ]
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {},
+                router,
+                watch: {
+                    '$route.path': function(newVal,oldVal){
+                        // console.log(newVal+'========'+oldVal)
+                        if(newVal === '/login'){
+                            console.log('欢迎进入登录页面')
+                        }else if(newVal === '/register'){
+                            console.log('欢迎进入注册页面')
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

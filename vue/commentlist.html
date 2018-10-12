@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <cmt-box @func="loadComment"></cmt-box>
+            <ul class="list-group">
+                <li class="list-group-item" v-for="item in list" :key="item.id">
+                    <span class="badge">评论人：{{ item.name }}</span>
+                    {{ item.content }}
+                </li>
+            </ul>              
+        </div>
+
+
+        <template id="tmpl">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="name">评论人：</label>
+                    <input type="text" class="form-control" v-model="user" />
+                </div>
+                <div class="form-group">
+                    <label for="content">评论内容：</label>
+                    <textarea name="content" class="form-control" v-model="content"></textarea>
+                </div>
+                <input type="button" class="btn btn-primary" value="发表评论" @click="postComment" />
+            </div>
+        </template>
+        <script type="text/javascript">
+            var commentBox = {
+                template: '#tmpl',
+                data: function(){
+                    return {
+                        user: '',
+                        content: ''
+                    }
+                },
+                methods: {
+                    postComment(){
+                        //1、评论数据存入 localstorage 中
+                        //2、组织出一个新的评论对象
+                        //3、把得到的评论对象存入 localStorage 中
+                        //  3.1 localStorage 只支持字符串数据存储，要先调用 JSON.stringify
+                        //  3.2 在保存最新的评论数据之前， 先从localStorage中获取之前的评论数据（string）转化为一个数组对象，然后把最新评论push到这个数组
+                        //  3.3如果获取到的 localStorage 中的评论字符串为空，则可以返回一个 '[]' 让JSON.parse去转换
+                        //  3.4 把最新的评论列表数组再次调用 JSON.stringify转化为数组字符串，然后调用localStorage.setitem()
+                        var comment = {id: Date.now(), name: this.user, content: this.content}
+                        var list = JSON.parse(localStorage.getItem('key') || '[]')
+                        list.unshift(comment)
+                        localStorage.setItem('key',JSON.stringify(list))
+                        this.user = this.content = ''
+                        this.$emit('func')
+                    }
+                }
+            }
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    list: [
+                        { id: Date.now(), name: '李白', content: '天生我材必有用' },
+                        { id: Date.now()+1, name: '张飞', content: '燕人张飞在此' },
+                        { id: Date.now()+2, name: '曹操', content: '多疑多疑多疑' }
+                    ]
+                },
+                created(){
+                    this.loadComment()
+                },
+                methods: {
+                    loadComment(){
+                        var list = JSON.parse(localStorage.getItem('key') || '[]')
+                        this.list = list
+                    }
+                },
+                components: {
+                    'cmt-box': commentBox
+                }
+            })
+        </script>
+    </body>
+</html>

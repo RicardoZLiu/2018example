@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{ msg | msgFormat('haha','这是arg2============') | test }}</p>
+        </div>
+        <script type="text/javascript">
+            Vue.filter('msgFormat',function(msg,arg1,arg2){
+                return msg.replace(/哈哈/g,arg1+arg2);
+            }); 
+            Vue.filter('test',function(msg){
+                return msg+'这是test过滤器'
+            });
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg: '哈哈，打不到我把，哈哈，我就是这么强大'
+                }
+            })
+        </script>
+    </body>
+</html>

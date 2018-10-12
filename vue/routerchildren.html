@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/home">HOME</router-link>
+
+            <router-view></router-view>
+        </div>
+
+        <template id="tmpl">
+            <div>
+                <h3>这是一个页面</h3>
+
+                <router-link to="/home/login">登录</router-link>
+                <router-link to="/home/register">注册</router-link>
+                <router-view></router-view>                
+            </div>
+        </template>
+        <script type="text/javascript">
+            var home = {
+                template: '#tmpl'
+            }
+            var login = {
+                template: '<h3>这是一个登陆页面</h3>',
+            }
+            var register = {
+                template: '<h3>这是一个注册页面</h3>'
+            }
+            var router = new VueRouter({
+                routes: [
+                    { path:'/home',
+                      component: home,
+                      children: [
+                      //路由的嵌套，path中不能加 / ，否则是以根路径开始请求
+                        { path:'login',component: login },
+                        { path:'register',component: register }
+                      ]
+                    }
+                ]
+            }) 
+
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {},
+                router
+            })
+        </script>
+    </body>
+</html>

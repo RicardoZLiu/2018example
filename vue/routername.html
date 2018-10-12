@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="vue-router.js"></script>
+        <style type="text/css">
+            html,body,h3 {
+                margin: 0;
+                padding: 0;
+            }
+            .header {
+                height: 80px;
+                background-color: orange;
+            }
+            .container {
+                display: flex;
+            }
+            .left {
+                background-color: lightgreen;
+                flex: 2;
+                height: 600px;
+            }
+            .main {
+                background-color: lightblue;
+                flex: 8;
+                height: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <router-view></router-view>
+            <div class="container">
+            <!-- left 和 main 是一个字符串  属性前面没有 : 绑定就都是值，不用考虑是变量或者字符串-->
+                <router-view name="left"></router-view>
+                <router-view name="main"></router-view>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var header = {
+                template: '<h3 class="header">header头部区域</h3>'
+            }
+            var leftBox = {
+                template: '<div class="left">left侧边栏区域</div>'
+            }
+            var mainBox = {
+                template: '<div class="main">main主体区域</div>'
+            }
+
+            var router = new VueRouter({
+                routes:[
+                    { path: '/',components:{
+                        // default,left,main是视图名称 都是字符串
+                        'default': header,
+                        'left': leftBox,
+                        'main': mainBox
+                    } }
+                ]
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {},
+                router
+            })
+        </script>
+    </body>
+</html>

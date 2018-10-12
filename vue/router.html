@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="vue-router.js"></script>
+        <style type="text/css">
+            .router-link-active, .myactive{
+                color: red;
+                font-weight: bold;
+                background-color: green;
+                font-size: 30px;
+            }
+
+            .v-enter,
+            .v-leave-to {
+                transform: translateX(80px);
+                opacity: 0;
+            }
+
+            .v-enter-active,
+            .v-leave-active {
+                transition: all .8s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+<!--        <a href="#/login">登陆</a>
+            <a href="#/register">注册</a>
+ -->
+
+            <!-- router-link 默认渲染为a标签   绑定tag可以将其渲染为其他标签-->
+            <router-link to="/login?id=10&name=lz" tag="span">登陆</router-link>
+            <router-link to="/register/20/ls">注册</router-link>
+
+            <transition mode="out-in">
+                <router-view></router-view>
+            </transition>
+
+        </div>
+        <script>
+            //后端路由：对于普通的网站，所有的超链接都是url地址，所有url地址都对应服务器上对应的资源
+            //前端路由：对于单页面应用程序来说，主要通过url中的 hash（#号）来实现不同页面之间的切换，同时，hash有一个特点：HTTP请求中不会包含hash相关内容，所有单页面应用程序主要用hash来实现
+            
+            //使用vue-router
+            //1、导入vue-router路由模块
+            //2、创建一个路由对象，当导入 vue-router 之后，在window全局对象中出现一个路由构造函数，叫VueRouter
+            //3、new出构造函数之后，为VueRouter构造函数传入配置对象routes
+            //4、每个路由匹配规则都是一个对象，对象上有两个属性 
+            //   属性1 path 表示监听那个路由地址
+            //   属性2 component 表示路由如果匹配到 path，则展示 component 属性对应那个组件，属性值是组件模板对象
+            //5、将路由规则对象，注册到vm实例上，用来监听url地址的变化，然后展示对应的组件
+            //6、占位符<router-view></router-view>  匹配的组件会展示到这个占位符上
+            
+            //组件模板对象
+            var login = {
+                //$route.query 可以获取到路由传过来的参数  接收url通过？传递的参数
+                template: '<h3>这是一个登陆页面-----{{$route.query.id}}-------{{$route.query.name}}</h3>',
+                created(){
+                    console.log(this.$route)
+                }
+
+            }
+            var register = {
+                //$route.params 可以获取到路由传过来的参数 接收path里 : 传递的参数
+                template: '<h3>这是一个注册页面-----{{$route.params.id}}-------{{$route.params.name}}</h3>'
+            }
+
+            var routerObj = new VueRouter({
+                routes: [
+                    { path: '', redirect: '/login'},      //路由重定向
+                    { path: '/login', component: login },
+                    { path: '/register/:id/:name', component: register}
+                ],
+                //配置选择路由高亮的激活类，默认类是router-link-active
+                linkActiveClass: 'myactive'
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {},
+                router: routerObj
+            })
+        </script>
+    </body>
+</html>

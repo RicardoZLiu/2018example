@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+        <!-- 也可以绑定 keyup 事件来监听文本框数据的改变 -->
+            <input type="text" v-model="firstname" /> +
+            <input type="text" v-model="lastname" /> =
+            <input type="text" v-model="fullname" />
+        </div>
+        <script type="text/javascript">
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    firstname: '',
+                    lastname: '',
+                    fullname: ''
+                },
+                methods: {},
+                //watch 可以监听非DOM事件的改变
+                watch: {
+                    // newVal是firstname的数据，oldVal是上一步的firstname的数据
+                    firstname: function(newVal,oldVal){
+                        this.fullname = newVal + '---' + this.lastname
+                    },
+                    lastname:function(newVal){
+                        this.fullname = this.firstname + '---' + newVal
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
